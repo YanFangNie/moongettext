@@ -1,0 +1,18 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: moongettext-example\n"
+"Language: fr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: examples/app.mbt:4
+msgctxt "button"
+msgid "Open"
+msgstr "Ouvrir"
+
+#: examples/app.mbt:8
+msgid "file"
+msgid_plural "files"
+msgstr[0] "fichier"
+msgstr[1] "fichiers"
+

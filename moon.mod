@@ -12,3 +12,8 @@ keywords = [ "gettext", "i18n", "po", "pot", "mo", "localization" ]
 
 description = "Pure MoonBit GNU gettext catalog parser, compiler, and runtime lookup library."
 
+import {
+  "moonbitlang/x@0.4.45",
+}
+
+preferred_target = "native"

@@ -1,9 +1,12 @@
 import {
   "Xpeng/moongettext",
   "moonbitlang/core/env",
+  "moonbitlang/x/fs",
+  "moonbitlang/x/sys",
 }
+
+supported_targets = "native"
 
 options(
   "is-main": true,
 )
-
