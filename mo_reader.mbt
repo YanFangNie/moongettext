@@ -151,7 +151,7 @@ pub fn parse_mo(bytes : Bytes) -> PoFile raise GettextError {
   checked_mo_range(translation_table, table_size, bytes.length(), 16)
 
   let entries : Array[PoEntry] = []
-  let seen : Map[String, Unit] = {}
+  let seen : Map[String, Unit] = Map([])
   for index in 0..<count {
     let original_slot = original_table + index * 8
     let translation_slot = translation_table + index * 8

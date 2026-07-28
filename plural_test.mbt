@@ -84,7 +84,7 @@ test "division by zero and out of range results are rejected" {
   } noraise {
     _ => fail("expected evaluation error")
   }
-  let invalid : @moongettext.PluralRule = { nplurals: 2, expression: "2" }
+  let invalid = @moongettext.parse_plural_forms("nplurals=2; plural=2;")
   try invalid.select(1) catch {
     Validation(message~) =>
       inspect(message, content="plural expression returned 2, outside 0..<2")

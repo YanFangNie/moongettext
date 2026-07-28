@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+      - name: Toolchain
+        run: moon version --all
+
+      - name: Format
+        run: moon fmt --check
+
+      - name: Public interface
+        run: |
+          moon info --target all
+          git diff --exit-code
+
+      - name: Check all stable targets
+        run: moon check --target all --deny-warn --warn-list +73
+
+      - name: Test all stable targets
+        run: moon test --target all --deny-warn --warn-list +73
+
+      - name: Build native CLI
+        run: moon build --target native
+
+      - name: Run pure example
+        run: moon run examples/basic
+
+      - name: Exercise CLI
+        run: |
+          moon run cmd/main -- validate examples/fr.po
+          moon run cmd/main -- compile examples/fr.po _build/ci-fr.mo
+          moon run cmd/main -- inspect _build/ci-fr.mo
+
+      - name: Package
+        run: moon package --frozen
+
+      - name: Verify clean generated state
+        run: git diff --exit-code
+

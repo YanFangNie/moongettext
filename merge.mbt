@@ -122,7 +122,7 @@ fn merged_header(template : PoEntry, existing : PoEntry?) -> PoEntry {
 fn index_existing_entries(
   document : PoFile,
 ) -> Map[String, PoEntry] raise GettextError {
-  let entries : Map[String, PoEntry] = {}
+  let entries : Map[String, PoEntry] = Map([])
   for entry in document.entries {
     if entry.is_header() {
       continue
@@ -140,7 +140,7 @@ fn index_existing_entries(
 
 ///|
 fn ensure_template_keys_unique(document : PoFile) -> Unit raise GettextError {
-  let keys : Map[String, Unit] = {}
+  let keys : Map[String, Unit] = Map([])
   let mut headers = 0
   for entry in document.entries {
     if entry.is_header() {
@@ -188,11 +188,18 @@ pub fn merge_template(
   ensure_template_keys_unique(template)
   let existing_entries = index_existing_entries(existing)
   let existing_header = existing.header()
-  let consumed : Map[String, Unit] = {}
+  let consumed : Map[String, Unit] = Map([])
   let output : Array[PoEntry] = []
   let mut matched = 0
   let mut added = 0
   let mut obsoleted = 0
+
+  if template.header() is None {
+    match existing_header {
+      Some(header) => output.push(header)
+      None => ()
+    }
+  }
 
   for template_entry in template.entries {
     if template_entry.is_header() {
@@ -210,13 +217,6 @@ pub fn merge_template(
         output.push(template_entry)
         added += 1
       }
-    }
-  }
-
-  if template.header() is None {
-    match existing_header {
-      Some(header) => output.push(header)
-      None => ()
     }
   }
 

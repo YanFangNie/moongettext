@@ -37,7 +37,7 @@ fn entry_has_mo_translation(entry : PoEntry) -> Bool {
 ///|
 fn collect_mo_pairs(document : PoFile) -> Array[MoPair] raise GettextError {
   let pairs : Array[MoPair] = []
-  let seen : Map[String, Unit] = {}
+  let seen : Map[String, Unit] = Map([])
   for entry in document.entries {
     if entry.obsolete || entry.is_fuzzy() || !entry_has_mo_translation(entry) {
       continue

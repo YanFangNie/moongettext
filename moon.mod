@@ -1,10 +1,10 @@
-name = "Xpeng/moongettext"
+name = "YanFangNie/moongettext"
 
 version = "0.1.0"
 
 readme = "README.mbt.md"
 
-repository = "https://github.com/pxgt/moongettext"
+repository = "https://github.com/YanFangNie/moongettext"
 
 license = "Apache-2.0"
 

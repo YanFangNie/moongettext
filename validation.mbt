@@ -144,7 +144,7 @@ pub fn validate_po(document : PoFile) -> Array[ValidationIssue] {
       )
   }
 
-  let seen : Map[String, Int] = {}
+  let seen : Map[String, Int] = Map([])
   for entry_index, entry in document.entries {
     if entry.is_header() {
       continue

@@ -1,7 +1,5 @@
 import {
-  "Xpeng/moongettext",
+  "YanFangNie/moongettext",
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")

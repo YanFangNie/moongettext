@@ -1,6 +1,6 @@
 ///|
 /// A validated `Plural-Forms` rule.
-pub(all) struct PluralRule {
+pub struct PluralRule {
   nplurals : Int
   expression : String
 } derive(Debug, Eq)

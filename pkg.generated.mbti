@@ -1,0 +1,164 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "YanFangNie/moongettext"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn compile_mo(PoFile, endian? : Endian) -> Bytes raise GettextError
+
+pub fn compile_mo_checked(PoFile, endian? : Endian) -> Bytes raise GettextError
+
+pub fn escape_po_string(String) -> String
+
+pub fn evaluate_plural_expression(String, Int) -> Int raise GettextError
+
+pub fn merge_template(PoFile, PoFile, keep_obsolete? : Bool) -> MergeResult raise GettextError
+
+pub fn mo_endian(Bytes) -> Endian raise GettextError
+
+pub fn parse_header_fields(String) -> Map[String, String]
+
+pub fn parse_mo(Bytes) -> PoFile raise GettextError
+
+pub fn parse_plural_forms(String) -> PluralRule raise GettextError
+
+pub fn parse_po(String) -> PoFile raise GettextError
+
+pub fn unescape_po_string(String) -> String raise GettextError
+
+pub fn validate_po(PoFile) -> Array[ValidationIssue]
+
+pub fn validate_po_strict(PoFile) -> Unit raise GettextError
+
+pub fn validation_has_errors(ArrayView[ValidationIssue]) -> Bool
+
+pub fn validation_report(ArrayView[ValidationIssue]) -> String
+
+pub fn write_po(PoFile) -> String
+
+pub fn write_pot(PoFile) -> String
+
+// Errors
+pub(all) suberror GettextError {
+  PoSyntax(line~ : Int, column~ : Int, message~ : String)
+  PluralSyntax(position~ : Int, message~ : String)
+  MoFormat(offset~ : Int, message~ : String)
+  Validation(message~ : String)
+} derive(Eq, @debug.Debug)
+
+// Types and methods
+pub struct Catalog {
+  messages : Map[String, PoEntry]
+  rule : PluralRule
+}
+pub fn Catalog::from_mo(Bytes) -> Self raise GettextError
+pub fn Catalog::from_po(PoFile, default_rule? : PluralRule, include_fuzzy? : Bool) -> Self raise GettextError
+pub fn Catalog::gettext(Self, String, fallback? : Self) -> String
+pub fn Catalog::length(Self) -> Int
+pub fn Catalog::ngettext(Self, String, String, Int, fallback? : Self) -> String raise GettextError
+pub fn Catalog::npgettext(Self, String, String, String, Int, fallback? : Self) -> String raise GettextError
+pub fn Catalog::pgettext(Self, String, String, fallback? : Self) -> String
+pub fn Catalog::plural_rule(Self) -> PluralRule
+
+pub(all) enum CommentKind {
+  Translator
+  Extracted
+  Reference
+  Flag
+  Previous
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Endian {
+  Little
+  Big
+} derive(Eq, @debug.Debug)
+
+pub(all) enum IssueSeverity {
+  IssueInfo
+  IssueWarning
+  IssueError
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MergeResult {
+  document : PoFile
+  stats : MergeStats
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MergeStats {
+  matched : Int
+  added : Int
+  obsoleted : Int
+} derive(Eq, @debug.Debug)
+
+pub struct PluralRule {
+  nplurals : Int
+  expression : String
+} derive(Eq, @debug.Debug)
+pub fn PluralRule::english() -> Self
+pub fn PluralRule::select(Self, Int) -> Int raise GettextError
+
+pub(all) struct PoComment {
+  kind : CommentKind
+  text : String
+} derive(Eq, @debug.Debug)
+pub fn PoComment::new(CommentKind, String) -> Self
+
+pub(all) struct PoEntry {
+  comments : Array[PoComment]
+  context : String?
+  msgid : String
+  msgid_plural : String?
+  translations : Array[String]
+  obsolete : Bool
+} derive(Eq, @debug.Debug)
+pub fn PoEntry::flags(Self) -> Array[String]
+pub fn PoEntry::has_flag(Self, String) -> Bool
+pub fn PoEntry::is_fuzzy(Self) -> Bool
+pub fn PoEntry::is_header(Self) -> Bool
+pub fn PoEntry::plural(String, String, Array[String], context? : String) -> Self
+pub fn PoEntry::singular(String, translation? : String, context? : String) -> Self
+pub fn PoEntry::source_references(Self) -> Array[SourceReference]
+pub fn PoEntry::translation(Self, Int) -> String?
+
+pub(all) struct PoFile {
+  entries : Array[PoEntry]
+} derive(Eq, @debug.Debug)
+pub fn PoFile::as_template(Self) -> Self
+pub fn PoFile::find_entry(Self, String, context? : String, include_obsolete? : Bool) -> PoEntry?
+pub fn PoFile::header(Self) -> PoEntry?
+pub fn PoFile::metadata(Self) -> Map[String, String]
+pub fn PoFile::new(Array[PoEntry]) -> Self
+pub fn PoFile::statistics(Self) -> PoStatistics
+
+pub(all) struct PoStatistics {
+  headers : Int
+  messages : Int
+  active : Int
+  translated : Int
+  untranslated : Int
+  fuzzy : Int
+  obsolete : Int
+  singular : Int
+  plural : Int
+  contextual : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct SourceReference {
+  path : String
+  line : Int?
+  column : Int?
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ValidationIssue {
+  severity : IssueSeverity
+  entry : Int?
+  code : String
+  message : String
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+

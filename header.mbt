@@ -4,7 +4,7 @@
 /// Lines without a colon are ignored. A line beginning with a space or tab is
 /// treated as a continuation of the preceding field.
 pub fn parse_header_fields(header : String) -> Map[String, String] {
-  let fields : Map[String, String] = {}
+  let fields : Map[String, String] = Map([])
   let mut current_key : String? = None
   for raw_line in header.split("\n") {
     let line = raw_line.to_owned().trim_end(chars="\r").to_owned()

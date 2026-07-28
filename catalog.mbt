@@ -43,7 +43,7 @@ pub fn Catalog::from_po(
     Some(value) => parse_plural_forms(value)
     None => default_rule
   }
-  let messages : Map[String, PoEntry] = {}
+  let messages : Map[String, PoEntry] = Map([])
   for entry in document.entries {
     if entry.is_header() ||
       entry.obsolete ||

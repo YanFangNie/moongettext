@@ -162,7 +162,7 @@ fn run_cli(args : Array[String]) -> Int raise {
 fn main {
   let code = try run_cli(@env.args()) catch {
     error => {
-      println("error: \{to_repr(error)}")
+      println("error: \{Repr(error)}")
       1
     }
   } noraise {
