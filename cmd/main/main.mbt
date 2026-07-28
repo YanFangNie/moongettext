@@ -105,12 +105,13 @@ fn inspect_file(path : String) -> Unit raise {
   let bytes = @fs.read_file_to_bytes(path)
   let endian = @moongettext.mo_endian(bytes)
   let document = @moongettext.parse_mo(bytes)
+  let stats = document.statistics()
   let order = match endian {
     Little => "little-endian"
     Big => "big-endian"
   }
   println(
-    "MO: \{document.entries.length()} entries, \{bytes.length()} bytes, \{order}",
+    "MO: \{stats.messages} messages (\{stats.plural} plural), \{bytes.length()} bytes, \{order}",
   )
   println(@moongettext.validation_report(@moongettext.validate_po(document)))
 }
