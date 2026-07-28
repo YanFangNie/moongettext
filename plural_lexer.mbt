@@ -21,7 +21,7 @@ priv enum PluralTokenKind {
   Percent
   Bang
   End
-} derive(Debug, Eq)
+} derive(Eq)
 
 ///|
 priv struct PluralToken {

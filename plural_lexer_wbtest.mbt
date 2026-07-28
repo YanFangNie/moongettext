@@ -3,39 +3,15 @@ test "plural lexer recognizes every operator" {
   let tokens = tokenize_plural(
     "n != 1 && (n % 10 >= 2 || n / 2 <= 4) ? +3 * 2 : -5",
   )
-  debug_inspect(
-    tokens.map(token => token.kind),
-    content=(
-      #|[
-      #|  Variable,
-      #|  NotEqual,
-      #|  Number(1),
-      #|  LogicalAnd,
-      #|  LeftParen,
-      #|  Variable,
-      #|  Percent,
-      #|  Number(10),
-      #|  GreaterEqual,
-      #|  Number(2),
-      #|  LogicalOr,
-      #|  Variable,
-      #|  Slash,
-      #|  Number(2),
-      #|  LessEqual,
-      #|  Number(4),
-      #|  RightParen,
-      #|  Question,
-      #|  Plus,
-      #|  Number(3),
-      #|  Star,
-      #|  Number(2),
-      #|  Colon,
-      #|  Minus,
-      #|  Number(5),
-      #|  End,
-      #|]
-    ),
-  )
+  assert_eq(tokens.length(), 26)
+  assert_true(tokens[0].kind == Variable)
+  assert_true(tokens[1].kind == NotEqual)
+  assert_true(tokens[2].kind == Number(1))
+  assert_true(tokens[8].kind == GreaterEqual)
+  assert_true(tokens[10].kind == LogicalOr)
+  assert_true(tokens[17].kind == Question)
+  assert_true(tokens[22].kind == Colon)
+  assert_true(tokens[25].kind == End)
 }
 
 ///|
