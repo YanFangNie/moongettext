@@ -1,0 +1,7 @@
+import {
+  "Xpeng/moongettext",
+}
+
+options(
+  "is-main": true,
+)
