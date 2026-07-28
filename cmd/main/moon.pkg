@@ -1,0 +1,9 @@
+import {
+  "Xpeng/moongettext",
+  "moonbitlang/core/env",
+}
+
+options(
+  "is-main": true,
+)
+
