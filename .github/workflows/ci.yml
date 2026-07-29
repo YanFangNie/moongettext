@@ -21,6 +21,9 @@ jobs:
       - name: Toolchain
         run: moon version --all
 
+      - name: Update package registry
+        run: moon update
+
       - name: Format
         run: moon fmt --check
 
@@ -52,4 +55,3 @@ jobs:
 
       - name: Verify clean generated state
         run: git diff --exit-code
-
