@@ -31,10 +31,10 @@ rules that cannot be represented by a simple singular/plural Boolean.
 
 ## Install
 
-After version `0.1.0` is published on mooncakes.io:
+Install the package with Moon:
 
 ```bash
-moon add YanFangNie/moongettext@0.1.0
+moon add YanFangNie/moongettext
 ```
 
 For this source checkout, no global installation is required:
@@ -342,11 +342,18 @@ CI runs the same format/interface/check/build/test/example/CLI/package gates.
 ## Specification and source notice
 
 This is an original MoonBit implementation informed by the public GNU gettext
-format documentation:
+format specifications and observable behavior. It is not a line-by-line port of
+an existing codebase:
 
 - [GNU gettext PO Files](https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html)
 - [GNU gettext MO Files](https://www.gnu.org/software/gettext/manual/html_node/MO-Files.html)
 - [GNU gettext Plural forms](https://www.gnu.org/software/gettext/manual/html_node/Plural-forms.html)
+
+The ecosystem survey also found
+[`Zhouz-z/moon_l10n`](https://mooncakes.io/docs/Zhouz-z/moon_l10n), which
+focuses on an ICU MessageFormat subset and catalog linting. `moongettext`
+instead focuses on GNU PO/POT/MO interoperability and gettext-style runtime
+lookups; the projects have no implementation-source relationship.
 
 No GNU gettext implementation source, generated code, or third-party catalog
 fixture is copied into this repository. Test inputs are small original fixtures.
